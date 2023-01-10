@@ -32,4 +32,10 @@ public class MedicalService
     {
         return _context.Tests.ToList();
     }
+
+    internal Patient? GetPatientById(int id)
+    {
+        var patient = _context.Patients.SingleOrDefault(p => p.PatientId == id);
+        return patient;
+    }
 }

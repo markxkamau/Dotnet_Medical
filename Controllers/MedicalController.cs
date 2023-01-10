@@ -35,6 +35,16 @@ public class MedicalController : ControllerBase
     public ActionResult<List<Test>> GetAllTests()
     {
         return _service.GetAllTests();
-    }    
+    }
+    [HttpGet("patient/{id}")]
+    public ActionResult<Patient> GetPatientById(int id){
+        var patient = _service.GetPatientById(id);
+        if (patient is null)
+        {
+            return NotFound("Patient Doesn't exist");
+            
+        }
+        return Ok(patient);
+    }
 
 }
