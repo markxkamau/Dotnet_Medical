@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MedicalTrack.Model;
+namespace MedicalTrack.src.Test.Model;
+
+using MedicalTrack.src.Patient.Model;
+
 
 public partial class Test
 {

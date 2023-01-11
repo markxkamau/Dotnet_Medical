@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+namespace MedicalTrack.src.Patient.Model;
 
-namespace MedicalTrack.Model;
-
+using MedicalTrack.src.Schedule.Model;
+using MedicalTrack.src.Test.Model;
 public partial class Patient
 {
     public int PatientId { get; set; }

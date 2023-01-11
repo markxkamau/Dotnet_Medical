@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace MedicalTrack.src.Schedule.Model;
 
-namespace MedicalTrack.Model;
+using MedicalTrack.src.Patient.Model;
+using MedicalTrack.src.Drug.Model;
 
 public partial class Schedule
 {

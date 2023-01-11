@@ -1,5 +1,8 @@
 using MedicalTrack.Data;
-using MedicalTrack.Service;
+using MedicalTrack.src.Drug.Service;
+using MedicalTrack.src.Patient.Service;
+using MedicalTrack.src.Schedule.Service;
+using MedicalTrack.src.Test.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +16,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MedicalContext>(options =>{
     options.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection"));
 });
-builder.Services.AddScoped<MedicalService>();
+builder.Services.AddScoped<PatientService>();
+builder.Services.AddScoped<DrugService>();
+builder.Services.AddScoped<ScheduleService>();
+builder.Services.AddScoped<TestService>();
+
 
 var app = builder.Build();
 
