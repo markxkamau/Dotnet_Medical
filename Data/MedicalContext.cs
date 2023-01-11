@@ -1,4 +1,8 @@
-﻿using MedicalTrack.Model;
+﻿
+using MedicalTrack.src.Drug.Model;
+using MedicalTrack.src.Patient.Model;
+using MedicalTrack.src.Schedule.Model;
+using MedicalTrack.src.Test.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicalTrack.Data;
