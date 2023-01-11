@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace MedicalTrack.src.Patient.Model;
 
 using MedicalTrack.src.Schedule.Model;

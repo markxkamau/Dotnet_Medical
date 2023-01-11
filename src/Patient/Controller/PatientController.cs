@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalTrack.src.Patient.Controller;
 
+using MedicalTrack.src.Patient.Dtos;
 using MedicalTrack.src.Patient.Model;
 
 [ApiController]
