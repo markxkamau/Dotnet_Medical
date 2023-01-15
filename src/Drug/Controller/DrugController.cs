@@ -32,6 +32,22 @@ public class DrugController : ControllerBase
         return _service.GetDrugById(id);
     }
 
+    [HttpPost("new_drug")]
+    public ActionResult<DrugDto> CreateNewDrug(CreateDrugDto createDrugDto)
+    {
+        // Check if Drug already exists
+        bool exist = _service.CheckIfExists(createDrugDto);
+        if (!exist)
+        {
+            return BadRequest("Drug stated already exists");
+        }
+        // Push data to the database
+        var drugDto = _service.AddDrug(createDrugDto);
+        // Display the data
+        return Ok(drugDto);
+
+    }
+
 
 
 }
