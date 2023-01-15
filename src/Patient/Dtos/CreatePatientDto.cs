@@ -2,10 +2,11 @@ namespace MedicalTrack.src.Patient.Dtos;
 
 public record CreatePatientDto
 {
-    public string FirstName {get; set;} = string.Empty;
+    public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
-    public int PatientAge { get; set; }
+    public string PatientEmail { get; set; } = string.Empty;
+    public DateTime DateOfBirth { get; set; } = new DateTime();
     public string PatientCondition { get; set; } = string.Empty;
     public int DrugCount { get; set; }
-    
+
 }

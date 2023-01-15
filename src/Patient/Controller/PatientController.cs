@@ -37,4 +37,18 @@ public class PatientController : ControllerBase
         return Ok(patient);
     }
 
+    [HttpPost("new_patient")]
+    public ActionResult<PatientDto> CreatePatient(CreatePatientDto createPatientDto){
+        bool patientCheck = _service.SearchPatient(createPatientDto.PatientEmail);
+
+        if (!patientCheck)
+        {
+            return BadRequest("Patient Already exists");            
+        }
+
+        var patientDto = _service.CreatePatient(createPatientDto);
+
+        return Ok(patientDto);
+    }
+
 }
