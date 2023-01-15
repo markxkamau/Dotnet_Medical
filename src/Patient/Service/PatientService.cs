@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MedicalTrack.src.Patient.Service;
 
 using System;
+using System.Net.Mail;
 using MedicalTrack.src.Patient.Dtos;
 using MedicalTrack.src.Patient.Model;
 
@@ -19,6 +20,21 @@ public class PatientService
     public ActionResult<List<Patient>> GetAllPatients()
     {
         return _context.Patients.ToList();
+    }
+
+    internal bool CheckEmailValidity(string patientEmail)
+    {
+        var valid = true;
+
+        try
+        {
+            var emailAddress = new MailAddress(patientEmail);
+        }
+        catch
+        {
+            valid = false;
+        }
+        return valid;
     }
 
     internal PatientDto CreatePatient(CreatePatientDto createPatientDto)

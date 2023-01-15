@@ -39,6 +39,9 @@ public class PatientController : ControllerBase
 
     [HttpPost("new_patient")]
     public ActionResult<PatientDto> CreatePatient(CreatePatientDto createPatientDto){
+        if(!_service.CheckEmailValidity(createPatientDto.PatientEmail)){
+            return BadRequest("Check Emaill, No such account registered");
+        }
         bool patientCheck = _service.SearchPatient(createPatientDto.PatientEmail);
 
         if (!patientCheck)
