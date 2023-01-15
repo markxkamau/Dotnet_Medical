@@ -26,6 +26,11 @@ public class DrugService
     {
         var drug = _context.Drugs.SingleOrDefault(p => p.DrugId == id);
 
+        if (drug is null)
+        {
+            return new DrugDto();
+        }
+
         var drugDto = new DrugDto
         {
             DrugId = drug.DrugId,
