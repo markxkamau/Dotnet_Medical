@@ -24,7 +24,7 @@ public class PatientController : ControllerBase
     {
         return _service.GetAllPatients();
     }
-    
+
     [HttpGet("patient/{id}")]
     public ActionResult<Patient> GetPatientById(int id)
     {
@@ -38,15 +38,17 @@ public class PatientController : ControllerBase
     }
 
     [HttpPost("new_patient")]
-    public ActionResult<PatientDto> CreatePatient(CreatePatientDto createPatientDto){
-        if(!_service.CheckEmailValidity(createPatientDto.PatientEmail)){
+    public ActionResult<PatientDto> CreatePatient(CreatePatientDto createPatientDto)
+    {
+        if (!_service.CheckEmailValidity(createPatientDto.PatientEmail))
+        {
             return BadRequest("Check Emaill, No such account registered");
         }
         bool patientCheck = _service.SearchPatient(createPatientDto.PatientEmail);
 
         if (!patientCheck)
         {
-            return BadRequest("Patient Already exists");            
+            return BadRequest("Patient Already exists");
         }
 
         var patientDto = _service.CreatePatient(createPatientDto);

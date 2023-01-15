@@ -9,7 +9,7 @@ public partial class Drug
     public int DrugId { get; set; }
     public Dictionary<string, string>? DrugInfo { get; set; }
 
-    public int? DrugCount { get; set; }
+    public int DrugCount { get; set; }
 
     public Dictionary<string, string>? DrugPurpose { get; set; }
 
