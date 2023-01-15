@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalTrack.src.Drug.Service;
 
+using System;
+using MedicalTrack.src.Drug.Dto;
 using MedicalTrack.src.Drug.Model;
+using Microsoft.EntityFrameworkCore;
 
 public class DrugService
 {
@@ -19,4 +22,18 @@ public class DrugService
         return _context.Drugs.ToList();
     }
 
+    internal ActionResult<DrugDto> GetDrugById(int id)
+    {
+        var drug = _context.Drugs.SingleOrDefault(p => p.DrugId == id);
+
+        var drugDto = new DrugDto
+        {
+            DrugId = drug.DrugId,
+            DrugCount = drug.DrugCount,
+            DrugInfo = drug.DrugInfo,
+            DrugPurpose = drug.DrugPurpose
+        };
+
+        return drugDto;
+    }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalTrack.src.Drug.Controller;
 
+using MedicalTrack.src.Drug.Dto;
 using MedicalTrack.src.Drug.Model;
 
 
@@ -18,11 +19,19 @@ public class DrugController : ControllerBase
         _service = service;
     }
 
-   
+
     [HttpGet("drugs")]
     public ActionResult<List<Drug>> GetAllDrugs()
     {
         return _service.GetAllDrugs();
     }
+
+    [HttpGet("drug/{id}")]
+    public ActionResult<DrugDto> GetDrugById(int id)
+    {
+        return _service.GetDrugById(id);
+    }
+
+
 
 }
