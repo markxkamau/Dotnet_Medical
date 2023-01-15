@@ -8,6 +8,8 @@ public partial class Patient
     public int PatientId { get; set; }
 
     public Dictionary<string, string> PatientName { get; set; } = new Dictionary<string, string>();
+    
+    public string PatientEmail { get; set; } = string.Empty;
 
     public int PatientAge { get; set; }
 
