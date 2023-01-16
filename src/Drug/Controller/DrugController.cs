@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalTrack.src.Drug.Controller;
 
+using MedicalTrack.src.Drug.Dto;
 using MedicalTrack.src.Drug.Model;
 
 
@@ -18,11 +19,35 @@ public class DrugController : ControllerBase
         _service = service;
     }
 
-   
+
     [HttpGet("drugs")]
     public ActionResult<List<Drug>> GetAllDrugs()
     {
         return _service.GetAllDrugs();
     }
+
+    [HttpGet("drug/{id}")]
+    public ActionResult<DrugDto> GetDrugById(int id)
+    {
+        return _service.GetDrugById(id);
+    }
+
+    [HttpPost("new_drug")]
+    public ActionResult<DrugDto> CreateNewDrug(CreateDrugDto createDrugDto)
+    {
+        // Check if Drug already exists
+        bool exist = _service.CheckIfExists(createDrugDto);
+        if (!exist)
+        {
+            return BadRequest("Drug stated already exists");
+        }
+        // Push data to the database
+        var drugDto = _service.AddDrug(createDrugDto);
+        // Display the data
+        return Ok(drugDto);
+
+    }
+
+
 
 }
