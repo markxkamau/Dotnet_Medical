@@ -57,8 +57,8 @@ public class DrugService
         drugInfo.Add("Drug Size", createDrugDto.DrugSize.ToString());
         drugInfo.Add("Drug Packaging", createDrugDto.DrugPackaging);
 
-        var drug = _context.Drugs.SingleOrDefault(p => p.DrugInfo == drugInfo);
-        if (drug is null)
+        var drug = _context.Drugs.Any(p => p.DrugInfo == drugInfo);
+        if (drug)
         {
             return true;
         }
