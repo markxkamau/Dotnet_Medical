@@ -9,6 +9,7 @@ using MedicalTrack.src.Schedule.Model;
 using MedicalTrack.src.Drug.Dto;
 using MedicalTrack.src.Patient.Dtos;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 public class ScheduleService
 {
@@ -30,7 +31,7 @@ public class ScheduleService
         return true;
     }
 
-    internal ScheduleDto CreateNewSchedule(CreateScheduleDto createScheduleDto)
+    internal ScheduleDto AddNewSchedule(CreateScheduleDto createScheduleDto)
     {
         var patient = _context.Patients.Single(p => p.PatientId == createScheduleDto.SchedulePatientId);
         var drug = _context.Drugs.Single(p => p.DrugId == createScheduleDto.ScheduleDrugId);
@@ -39,11 +40,12 @@ public class ScheduleService
             ScheduleId = new int(),
             ScheduleConfirm = createScheduleDto.ScheduleConfirm,
             ScheduleDay = createScheduleDto.ScheduleDay,
-            ScheduleDrug = new DrugDto{
+            ScheduleDrug = new DrugDto
+            {
                 DrugId = drug.DrugId,
                 DrugCount = drug.DrugCount,
                 DrugInfo = drug.DrugInfo,
-                DrugPurpose =drug.DrugPurpose
+                DrugPurpose = drug.DrugPurpose
             },
             ScheduleDrugId = createScheduleDto.ScheduleDrugId,
             ScheduleTime = createScheduleDto.ScheduleTime,
@@ -58,7 +60,8 @@ public class ScheduleService
             }
         };
 
-        var schedule = new Schedule{
+        var schedule = new Schedule
+        {
             ScheduleId = scheduleDto.ScheduleId,
             ScheduleConfirm = scheduleDto.ScheduleConfirm,
             ScheduleDay = scheduleDto.ScheduleDay,
@@ -78,7 +81,10 @@ public class ScheduleService
     internal ActionResult<List<ScheduleDto>> GetAllSchedules()
     {
         List<ScheduleDto> scheduleDtos = new List<ScheduleDto>();
-        var schedules = _context.Schedules.ToList();
+        var schedules = _context.Schedules
+        .Include(p => p.ScheduleDrug)
+        .Include(o => o.SchedulePatient)
+        .ToList();
         foreach (var schedule in schedules)
         {
             var scheduleDto = new ScheduleDto

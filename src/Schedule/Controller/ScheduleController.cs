@@ -50,7 +50,7 @@ public class ScheduleController : ControllerBase
             
         }
         // Create new schedule
-        var schedule = _service.CreateNewSchedule(createScheduleDto);
+        var schedule = _service.AddNewSchedule(createScheduleDto);
         return Ok(schedule);
 
     }
