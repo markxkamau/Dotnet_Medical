@@ -40,24 +40,9 @@ public class ScheduleService
             ScheduleId = new int(),
             ScheduleConfirm = createScheduleDto.ScheduleConfirm,
             ScheduleDay = createScheduleDto.ScheduleDay,
-            ScheduleDrug = new DrugDto
-            {
-                DrugId = drug.DrugId,
-                DrugCount = drug.DrugCount,
-                DrugInfo = drug.DrugInfo,
-                DrugPurpose = drug.DrugPurpose
-            },
             ScheduleDrugId = createScheduleDto.ScheduleDrugId,
             ScheduleTime = createScheduleDto.ScheduleTime,
-            SchedulePatientId = createScheduleDto.SchedulePatientId,
-            SchedulePatient = new PatientDto
-            {
-                PatientAge = patient.PatientAge,
-                PatientId = patient.PatientId,
-                PatientCondition = patient.PatientCondition,
-                PatientEmail = patient.PatientEmail,
-                PatientName = patient.PatientName
-            }
+            SchedulePatientId = createScheduleDto.SchedulePatientId
         };
 
         var schedule = new Schedule
@@ -82,8 +67,6 @@ public class ScheduleService
     {
         List<ScheduleDto> scheduleDtos = new List<ScheduleDto>();
         var schedules = _context.Schedules
-        .Include(p => p.ScheduleDrug)
-        .Include(o => o.SchedulePatient)
         .ToList();
         foreach (var schedule in schedules)
         {
@@ -94,22 +77,7 @@ public class ScheduleService
                 ScheduleConfirm = schedule.ScheduleConfirm,
                 SchedulePatientId = schedule.SchedulePatientId,
                 ScheduleDrugId = schedule.ScheduleDrugId,
-                ScheduleDay = schedule.ScheduleDay,
-                ScheduleDrug = new DrugDto
-                {
-                    DrugId = schedule.ScheduleDrug.DrugId,
-                    DrugCount = schedule.ScheduleDrug.DrugCount,
-                    DrugInfo = schedule.ScheduleDrug.DrugInfo,
-                    DrugPurpose = schedule.ScheduleDrug.DrugPurpose
-                },
-                SchedulePatient = new PatientDto
-                {
-                    PatientId = schedule.SchedulePatient.PatientId,
-                    PatientAge = schedule.SchedulePatient.PatientAge,
-                    PatientCondition = schedule.SchedulePatient.PatientCondition,
-                    PatientEmail = schedule.SchedulePatient.PatientEmail,
-                    PatientName = schedule.SchedulePatient.PatientName
-                }
+                ScheduleDay = schedule.ScheduleDay
 
             };
             scheduleDtos.Add(scheduleDto);
@@ -138,23 +106,29 @@ public class ScheduleService
     }
 
 
-    internal ActionResult<ScheduleDto> GetScheduleFromPatient(int id)
+    internal ActionResult<List<ScheduleDto>> GetScheduleFromPatient(int id)
     {
+        List<ScheduleDto> scheduleDtos = new List<ScheduleDto>();
         var check = _context.Schedules.Any(p => p.SchedulePatientId == id);
         if (!check)
         {
-            return new ScheduleDto();
+            return new List<ScheduleDto>();
         }
-        var schedule = _context.Schedules.Single(p => p.SchedulePatientId == id);
+        var schedule = _context.Schedules.Where(p => p.SchedulePatientId == id);
 
-        return new ScheduleDto
+        foreach (var item in schedule)
         {
-            ScheduleId = schedule.ScheduleId,
-            ScheduleConfirm = schedule.ScheduleConfirm,
-            ScheduleDay = schedule.ScheduleDay,
-            ScheduleDrugId = schedule.ScheduleDrugId,
-            SchedulePatientId = schedule.SchedulePatientId,
-            ScheduleTime = schedule.ScheduleTime
-        };
+
+            scheduleDtos.Add(new ScheduleDto
+            {
+                ScheduleId = item.ScheduleId,
+                ScheduleConfirm = item.ScheduleConfirm,
+                ScheduleDay = item.ScheduleDay,
+                ScheduleDrugId = item.ScheduleDrugId,
+                SchedulePatientId = item.SchedulePatientId,
+                ScheduleTime = item.ScheduleTime
+            });
+        }
+        return scheduleDtos;
     }
 }
