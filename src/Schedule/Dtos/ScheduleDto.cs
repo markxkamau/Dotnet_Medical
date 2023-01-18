@@ -16,9 +16,5 @@ namespace MedicalTrack.src.Schedule.Dtos
         public int ScheduleDrugId { get; set; }
 
         public int ScheduleId { get; set; }
-
-        public virtual DrugDto ScheduleDrug { get; set; } = null!;
-
-        public virtual PatientDto SchedulePatient { get; set; } = null!;
     }
 }

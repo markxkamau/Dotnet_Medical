@@ -34,9 +34,9 @@ public class ScheduleController : ControllerBase
     }
 
     [HttpGet("schedule/patient/{id}")]
-    public ActionResult<ScheduleDto> GetScheduleFromPatientId(int Id)
+    public ActionResult<List<ScheduleDto>> GetScheduleFromPatientId(int id)
     {
-        return _service.GetScheduleFromPatient(Id);
+        return _service.GetScheduleFromPatient(id);
     }
 
     [HttpPost("schedule")]
