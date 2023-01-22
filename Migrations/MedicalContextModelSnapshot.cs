@@ -32,7 +32,7 @@ namespace MedicalTrack.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DrugId"));
 
-                    b.Property<int?>("DrugCount")
+                    b.Property<int>("DrugCount")
                         .HasColumnType("integer");
 
                     b.Property<Dictionary<string, string>>("DrugInfo")
@@ -82,10 +82,7 @@ namespace MedicalTrack.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ScheduleId"));
 
-                    b.Property<bool[]>("ScheduleConfirm")
-                        .HasColumnType("boolean[]");
-
-                    b.Property<int?>("ScheduleDay")
+                    b.Property<int?>("Intakes")
                         .HasColumnType("integer");
 
                     b.Property<int>("ScheduleDrugId")
@@ -94,8 +91,9 @@ namespace MedicalTrack.Migrations
                     b.Property<int>("SchedulePatientId")
                         .HasColumnType("integer");
 
-                    b.Property<TimeOnly>("ScheduleTime")
-                        .HasColumnType("time without time zone");
+                    b.Property<List<string>>("ScheduleTime")
+                        .IsRequired()
+                        .HasColumnType("text[]");
 
                     b.HasKey("ScheduleId");
 

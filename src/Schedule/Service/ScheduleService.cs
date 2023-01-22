@@ -38,8 +38,7 @@ public class ScheduleService
         var scheduleDto = new ScheduleDto
         {
             ScheduleId = new int(),
-            ScheduleConfirm = createScheduleDto.ScheduleConfirm,
-            ScheduleDay = createScheduleDto.ScheduleDay,
+            Intakes = createScheduleDto.Intakes,
             ScheduleDrugId = createScheduleDto.ScheduleDrugId,
             ScheduleTime = createScheduleDto.ScheduleTime,
             SchedulePatientId = createScheduleDto.SchedulePatientId
@@ -48,8 +47,7 @@ public class ScheduleService
         var schedule = new Schedule
         {
             ScheduleId = scheduleDto.ScheduleId,
-            ScheduleConfirm = scheduleDto.ScheduleConfirm,
-            ScheduleDay = scheduleDto.ScheduleDay,
+            Intakes = scheduleDto.Intakes,
             ScheduleTime = scheduleDto.ScheduleTime,
             ScheduleDrug = drug,
             ScheduleDrugId = scheduleDto.ScheduleDrugId,
@@ -74,10 +72,9 @@ public class ScheduleService
             {
                 ScheduleId = schedule.ScheduleId,
                 ScheduleTime = schedule.ScheduleTime,
-                ScheduleConfirm = schedule.ScheduleConfirm,
+                Intakes = schedule.Intakes,
                 SchedulePatientId = schedule.SchedulePatientId,
                 ScheduleDrugId = schedule.ScheduleDrugId,
-                ScheduleDay = schedule.ScheduleDay
 
             };
             scheduleDtos.Add(scheduleDto);
@@ -97,8 +94,7 @@ public class ScheduleService
         return new ScheduleDto
         {
             ScheduleId = schedule.ScheduleId,
-            ScheduleConfirm = schedule.ScheduleConfirm,
-            ScheduleDay = schedule.ScheduleDay,
+            Intakes = schedule.Intakes,
             ScheduleDrugId = schedule.ScheduleDrugId,
             SchedulePatientId = schedule.SchedulePatientId,
             ScheduleTime = schedule.ScheduleTime
@@ -122,8 +118,7 @@ public class ScheduleService
             scheduleDtos.Add(new ScheduleDto
             {
                 ScheduleId = item.ScheduleId,
-                ScheduleConfirm = item.ScheduleConfirm,
-                ScheduleDay = item.ScheduleDay,
+                Intakes = item.Intakes,
                 ScheduleDrugId = item.ScheduleDrugId,
                 SchedulePatientId = item.SchedulePatientId,
                 ScheduleTime = item.ScheduleTime

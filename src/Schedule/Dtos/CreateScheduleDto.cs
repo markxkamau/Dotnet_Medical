@@ -2,11 +2,9 @@ namespace MedicalTrack.src.Schedule.Dtos;
 
 public record CreateScheduleDto
 {
-    public int? ScheduleDay { get; set; }
+    public int? Intakes { get; set; }
 
-    public TimeOnly ScheduleTime { get; set; }
-
-    public bool[]? ScheduleConfirm { get; set; }
+    public List<string> ScheduleTime { get; set; } = new List<string>();
 
     public int SchedulePatientId { get; set; }
 

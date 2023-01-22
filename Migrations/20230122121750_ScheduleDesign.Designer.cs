@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MedicalTrack.Migrations
 {
     [DbContext(typeof(MedicalContext))]
-    [Migration("20230110135419_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230122121750_ScheduleDesign")]
+    partial class ScheduleDesign
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace MedicalTrack.Migrations
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "hstore");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("MedicalTrack.Model.Drug", b =>
+            modelBuilder.Entity("MedicalTrack.src.Drug.Model.Drug", b =>
                 {
                     b.Property<int>("DrugId")
                         .ValueGeneratedOnAdd()
@@ -35,7 +35,7 @@ namespace MedicalTrack.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DrugId"));
 
-                    b.Property<int?>("DrugCount")
+                    b.Property<int>("DrugCount")
                         .HasColumnType("integer");
 
                     b.Property<Dictionary<string, string>>("DrugInfo")
@@ -49,7 +49,7 @@ namespace MedicalTrack.Migrations
                     b.ToTable("Drugs");
                 });
 
-            modelBuilder.Entity("MedicalTrack.Model.Patient", b =>
+            modelBuilder.Entity("MedicalTrack.src.Patient.Model.Patient", b =>
                 {
                     b.Property<int>("PatientId")
                         .ValueGeneratedOnAdd()
@@ -64,6 +64,10 @@ namespace MedicalTrack.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("PatientEmail")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<Dictionary<string, string>>("PatientName")
                         .IsRequired()
                         .HasColumnType("hstore");
@@ -73,7 +77,7 @@ namespace MedicalTrack.Migrations
                     b.ToTable("Patients");
                 });
 
-            modelBuilder.Entity("MedicalTrack.Model.Schedule", b =>
+            modelBuilder.Entity("MedicalTrack.src.Schedule.Model.Schedule", b =>
                 {
                     b.Property<int>("ScheduleId")
                         .ValueGeneratedOnAdd()
@@ -81,10 +85,7 @@ namespace MedicalTrack.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ScheduleId"));
 
-                    b.Property<bool[]>("ScheduleConfirm")
-                        .HasColumnType("boolean[]");
-
-                    b.Property<int?>("ScheduleDay")
+                    b.Property<int?>("Intakes")
                         .HasColumnType("integer");
 
                     b.Property<int>("ScheduleDrugId")
@@ -93,8 +94,9 @@ namespace MedicalTrack.Migrations
                     b.Property<int>("SchedulePatientId")
                         .HasColumnType("integer");
 
-                    b.Property<TimeOnly>("ScheduleTime")
-                        .HasColumnType("time without time zone");
+                    b.Property<List<string>>("ScheduleTime")
+                        .IsRequired()
+                        .HasColumnType("text[]");
 
                     b.HasKey("ScheduleId");
 
@@ -105,7 +107,7 @@ namespace MedicalTrack.Migrations
                     b.ToTable("Schedules");
                 });
 
-            modelBuilder.Entity("MedicalTrack.Model.Test", b =>
+            modelBuilder.Entity("MedicalTrack.src.Test.Model.Test", b =>
                 {
                     b.Property<int>("TestId")
                         .ValueGeneratedOnAdd()
@@ -135,15 +137,15 @@ namespace MedicalTrack.Migrations
                     b.ToTable("Tests");
                 });
 
-            modelBuilder.Entity("MedicalTrack.Model.Schedule", b =>
+            modelBuilder.Entity("MedicalTrack.src.Schedule.Model.Schedule", b =>
                 {
-                    b.HasOne("MedicalTrack.Model.Drug", "ScheduleDrug")
+                    b.HasOne("MedicalTrack.src.Drug.Model.Drug", "ScheduleDrug")
                         .WithMany("Schedules")
                         .HasForeignKey("ScheduleDrugId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MedicalTrack.Model.Patient", "SchedulePatient")
+                    b.HasOne("MedicalTrack.src.Patient.Model.Patient", "SchedulePatient")
                         .WithMany("Schedules")
                         .HasForeignKey("SchedulePatientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -154,9 +156,9 @@ namespace MedicalTrack.Migrations
                     b.Navigation("SchedulePatient");
                 });
 
-            modelBuilder.Entity("MedicalTrack.Model.Test", b =>
+            modelBuilder.Entity("MedicalTrack.src.Test.Model.Test", b =>
                 {
-                    b.HasOne("MedicalTrack.Model.Patient", "TestPatient")
+                    b.HasOne("MedicalTrack.src.Patient.Model.Patient", "TestPatient")
                         .WithMany("Tests")
                         .HasForeignKey("TestPatientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -165,12 +167,12 @@ namespace MedicalTrack.Migrations
                     b.Navigation("TestPatient");
                 });
 
-            modelBuilder.Entity("MedicalTrack.Model.Drug", b =>
+            modelBuilder.Entity("MedicalTrack.src.Drug.Model.Drug", b =>
                 {
                     b.Navigation("Schedules");
                 });
 
-            modelBuilder.Entity("MedicalTrack.Model.Patient", b =>
+            modelBuilder.Entity("MedicalTrack.src.Patient.Model.Patient", b =>
                 {
                     b.Navigation("Schedules");
 
