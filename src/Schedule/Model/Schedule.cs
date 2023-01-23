@@ -17,7 +17,7 @@ public partial class Schedule
 
     public int ScheduleId { get; set; }
 
-    public virtual DrugDto ScheduleDrug { get; set; } = null!;
+    public virtual Drug ScheduleDrug { get; set; } = null!;
 
-    public virtual PatientDto SchedulePatient { get; set; } = null!;
+    public virtual Patient SchedulePatient { get; set; } = null!;
 }

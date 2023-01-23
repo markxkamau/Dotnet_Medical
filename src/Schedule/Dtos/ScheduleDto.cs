@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using MedicalTrack.src.Drug.Dto;
 using MedicalTrack.src.Patient.Dtos;
 
@@ -12,7 +13,7 @@ namespace MedicalTrack.src.Schedule.Dtos
         public int SchedulePatientId { get; set; }
 
         public int ScheduleDrugId { get; set; }
-
+[Key]
         public int ScheduleId { get; set; }
     }
 }

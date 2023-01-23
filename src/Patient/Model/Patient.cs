@@ -17,7 +17,7 @@ public partial class Patient
 
     public string PatientCondition { get; set; } = string.Empty;
 
-    public virtual ICollection<ScheduleDto> Schedules { get; } = new List<ScheduleDto>();
+    public virtual ICollection<Schedule> Schedules { get; } = new List<Schedule>();
 
-    public virtual ICollection<TestDto> Tests { get; } = new List<TestDto>();
+    public virtual ICollection<Test> Tests { get; } = new List<Test>();
 }

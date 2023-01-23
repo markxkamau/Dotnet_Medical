@@ -1,10 +1,12 @@
+using System.ComponentModel.DataAnnotations;
 using MedicalTrack.src.Patient.Dtos;
 
 namespace MedicalTrack.src.Test.Dtos;
 
 public record TestDto
 {
-    public int TestId { get; set; }
+    [Key]
+     public int TestId { get; set; }
 
     public int TestResultBp { get; set; }
 
@@ -16,7 +18,7 @@ public record TestDto
 
     public int TestPatientId { get; set; }
 
-    public DateTime TestDate { get; set; } = DateTime.Today;
+    public DateTime TestDate { get; set; } = DateTime.UtcNow;
 
 
 }

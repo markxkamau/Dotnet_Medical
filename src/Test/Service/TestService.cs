@@ -16,12 +16,12 @@ public class TestService
         _context = context;
     }
 
-    internal ActionResult<TestDto> AddNewTest(CreateTestDto createTestDto)
+    internal TestDto AddNewTest(CreateTestDto createTestDto)
     {
         var testDto = new TestDto
         {
             TestId = new int(),
-            TestDate = DateTime.Today,
+            TestDate = DateTime.UtcNow,
             TestPatientId = createTestDto.TestPatientId,
             TestResultBp = createTestDto.TestResultBp,
             TestResultOxygen = createTestDto.TestResultOxygen,

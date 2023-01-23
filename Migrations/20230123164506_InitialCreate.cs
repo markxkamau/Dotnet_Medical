@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -7,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MedicalTrack.Migrations
 {
     /// <inheritdoc />
-    public partial class ScheduleDesign : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -84,6 +85,7 @@ namespace MedicalTrack.Migrations
                     TestResultSugars = table.Column<int>(type: "integer", nullable: false),
                     TestResultWeight = table.Column<int>(type: "integer", nullable: false),
                     TestResultOxygen = table.Column<int>(type: "integer", nullable: false),
+                    TestDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     TestPatientId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>

@@ -14,5 +14,5 @@ public partial class Drug
 
     public Dictionary<string, string>? DrugPurpose { get; set; }
 
-    public virtual ICollection<ScheduleDto> Schedules { get; } = new List<ScheduleDto>();
+    public virtual ICollection<Schedule> Schedules { get; } = new List<Schedule>();
 }

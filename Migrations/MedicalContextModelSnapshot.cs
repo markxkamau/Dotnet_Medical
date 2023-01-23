@@ -112,6 +112,9 @@ namespace MedicalTrack.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TestId"));
 
+                    b.Property<DateTime>("TestDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<int>("TestPatientId")
                         .HasColumnType("integer");
 

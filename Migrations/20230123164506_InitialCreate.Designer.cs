@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MedicalTrack.Migrations
 {
     [DbContext(typeof(MedicalContext))]
-    [Migration("20230122121750_ScheduleDesign")]
-    partial class ScheduleDesign
+    [Migration("20230123164506_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -114,6 +114,9 @@ namespace MedicalTrack.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TestId"));
+
+                    b.Property<DateTime>("TestDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("TestPatientId")
                         .HasColumnType("integer");
