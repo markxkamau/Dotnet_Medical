@@ -1,7 +1,9 @@
 ﻿
 namespace MedicalTrack.src.Patient.Model;
 
+using MedicalTrack.src.Schedule.Dtos;
 using MedicalTrack.src.Schedule.Model;
+using MedicalTrack.src.Test.Dtos;
 using MedicalTrack.src.Test.Model;
 public partial class Patient
 {
@@ -15,7 +17,7 @@ public partial class Patient
 
     public string PatientCondition { get; set; } = string.Empty;
 
-    public virtual ICollection<Schedule> Schedules { get; } = new List<Schedule>();
+    public virtual ICollection<ScheduleDto> Schedules { get; } = new List<ScheduleDto>();
 
-    public virtual ICollection<Test> Tests { get; } = new List<Test>();
+    public virtual ICollection<TestDto> Tests { get; } = new List<TestDto>();
 }

@@ -69,9 +69,21 @@ public class DrugService
 
     }
 
-    internal ActionResult<List<Drug>> GetAllDrugs()
+    internal ActionResult<List<DrugDto>> GetAllDrugs()
     {
-        return _context.Drugs.ToList();
+        var drugs = _context.Drugs.ToList();
+        List<DrugDto> drugDtos = new List<DrugDto>();
+        foreach (var item in drugs)
+        {
+            var drugDto = new DrugDto{
+                DrugId = item.DrugId,
+                DrugCount = item.DrugCount,
+                DrugInfo = item.DrugInfo
+
+            };
+            drugDtos.Add(drugDto);
+        }
+        return drugDtos;
     }
 
     internal ActionResult<DrugDto> GetDrugById(int id)

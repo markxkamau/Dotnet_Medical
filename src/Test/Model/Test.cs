@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace MedicalTrack.src.Test.Model;
 
+using MedicalTrack.src.Patient.Dtos;
 using MedicalTrack.src.Patient.Model;
 
 
@@ -20,5 +21,5 @@ public partial class Test
 
     public int TestPatientId { get; set; }
 
-    public virtual Patient TestPatient { get; set; } = null!;
+    public virtual PatientDto TestPatient { get; set; } = null!;
 }

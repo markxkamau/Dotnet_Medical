@@ -49,10 +49,16 @@ public class ScheduleService
             ScheduleId = scheduleDto.ScheduleId,
             Intakes = scheduleDto.Intakes,
             ScheduleTime = scheduleDto.ScheduleTime,
-            ScheduleDrug = drug,
+            ScheduleDrug = new DrugDto{DrugId = drug.DrugId, DrugCount = drug.DrugCount, DrugInfo = drug.DrugInfo, DrugPurpose = drug.DrugPurpose},
             ScheduleDrugId = scheduleDto.ScheduleDrugId,
             SchedulePatientId = scheduleDto.SchedulePatientId,
-            SchedulePatient = patient
+            SchedulePatient = new PatientDto{
+                PatientAge = patient.PatientAge,
+                PatientCondition = patient.PatientCondition,
+                PatientEmail = patient.PatientEmail,
+                PatientId = patient.PatientId,
+                PatientName = patient.PatientName
+            }
         };
         _context.Schedules.Add(schedule);
         _context.SaveChanges();

@@ -21,7 +21,7 @@ public class DrugController : ControllerBase
 
 
     [HttpGet("drugs")]
-    public ActionResult<List<Drug>> GetAllDrugs()
+    public ActionResult<List<DrugDto>> GetAllDrugs()
     {
         return Ok(_service.GetAllDrugs());
     }

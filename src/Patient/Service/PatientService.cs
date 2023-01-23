@@ -17,9 +17,21 @@ public class PatientService
         _context = context;
     }
 
-    public ActionResult<List<Patient>> GetAllPatients()
+    public ActionResult<List<PatientDto>> GetAllPatients()
     {
-        return _context.Patients.ToList();
+        var patients = _context.Patients.ToList();
+        List<PatientDto> patientDtos = new List<PatientDto>();
+        foreach(Patient p in patients){
+            var patientDto = new PatientDto{
+                PatientId = p.PatientId,
+                PatientAge = p.PatientAge,
+                PatientCondition = p.PatientCondition,
+                PatientEmail = p.PatientCondition,
+                PatientName = p.PatientName
+            };
+            patientDtos.Add(patientDto);
+        }
+        return patientDtos;
     }
 
     internal bool CheckEmailValidity(string patientEmail)
@@ -69,10 +81,16 @@ public class PatientService
         return patientDto;
     }
 
-    internal Patient? GetPatientById(int id)
+    internal PatientDto GetPatientById(int id)
     {
-        var patient = _context.Patients.SingleOrDefault(p => p.PatientId == id);
-        return patient;
+        var patient = _context.Patients.Single(p => p.PatientId == id);
+        return new PatientDto{
+            PatientAge = patient.PatientAge,
+            PatientCondition = patient.PatientCondition,
+            PatientEmail = patient.PatientEmail,
+            PatientId = patient.PatientId,
+            PatientName = patient.PatientName
+        };
     }
 
     internal bool SearchPatient(string patientEmail)

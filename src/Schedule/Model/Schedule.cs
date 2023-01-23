@@ -2,6 +2,8 @@
 
 using MedicalTrack.src.Patient.Model;
 using MedicalTrack.src.Drug.Model;
+using MedicalTrack.src.Patient.Dtos;
+using MedicalTrack.src.Drug.Dto;
 
 public partial class Schedule
 {
@@ -15,7 +17,7 @@ public partial class Schedule
 
     public int ScheduleId { get; set; }
 
-    public virtual Drug ScheduleDrug { get; set; } = null!;
+    public virtual DrugDto ScheduleDrug { get; set; } = null!;
 
-    public virtual Patient SchedulePatient { get; set; } = null!;
+    public virtual PatientDto SchedulePatient { get; set; } = null!;
 }

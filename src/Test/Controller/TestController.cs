@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalTrack.src.Test.Controller;
+
+using MedicalTrack.src.Test.Dtos;
 using MedicalTrack.src.Test.Model;
 
 [ApiController]
@@ -15,7 +17,7 @@ public class TestController : ControllerBase
         _service = service;
     }
     [HttpGet("tests")]
-    public ActionResult<List<Test>> GetAllTests()
+    public ActionResult<List<TestDto>> GetAllTests()
     {
         return _service.GetAllTests();
     }
