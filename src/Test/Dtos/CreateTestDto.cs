@@ -1,22 +1,22 @@
-using MedicalTrack.src.Patient.Dtos;
+using System.ComponentModel.DataAnnotations;
 
 namespace MedicalTrack.src.Test.Dtos;
 
-public record TestDto
+public record CreateTestDto
 {
-    public int TestId { get; set; }
-
+    [Required]
+    [Range(125, 180)]
     public int TestResultBp { get; set; }
-
+    [Required]
+    [Range(0, 230)]
     public int TestResultSugars { get; set; }
-
+    [Required]
     public int TestResultWeight { get; set; }
-
+    [Required]
+    [Range(0, 100)]
     public int TestResultOxygen { get; set; }
+    [Required]
 
     public int TestPatientId { get; set; }
-
-    public DateTime TestDate { get; set; } = DateTime.Today;
-
 
 }

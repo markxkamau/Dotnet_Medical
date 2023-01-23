@@ -19,6 +19,8 @@ public partial class Test
 
     public int TestResultOxygen { get; set; }
 
+    public DateTime TestDate { get; set; } = DateTime.Today;
+
     public int TestPatientId { get; set; }
 
     public virtual PatientDto TestPatient { get; set; } = null!;
