@@ -126,4 +126,14 @@ public class ScheduleService
         }
         return scheduleDtos;
     }
+
+    internal bool CheckPatient(int schedulePatientId, int scheduleDrugId)
+    {
+        if (_context.Patients.Any(p => p.PatientId == schedulePatientId) &&
+         _context.Drugs.Any(d => d.DrugId == scheduleDrugId))
+        {
+            return true;
+        }
+        return false;
+    }
 }

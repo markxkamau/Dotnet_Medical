@@ -43,11 +43,17 @@ public class ScheduleController : ControllerBase
     public ActionResult<ScheduleDto> CreateNewSchedule(CreateScheduleDto createScheduleDto)
     {
         // Check if schedule exists
-        bool check =_service.CheckSchedule(createScheduleDto);
+        bool check = _service.CheckSchedule(createScheduleDto);
         if (!check)
         {
             return BadRequest("Schedule for Patient already exists under the drug stated");
-            
+
+        }
+        // Check if patient and drug exist
+        bool patientCheck = _service.CheckPatient(createScheduleDto.SchedulePatientId, createScheduleDto.ScheduleDrugId);
+        if (!patientCheck)
+        {
+            return NotFound("Patient or Drug Id not yet declared");
         }
         // Create new schedule
         var schedule = _service.AddNewSchedule(createScheduleDto);
