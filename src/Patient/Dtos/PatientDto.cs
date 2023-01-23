@@ -1,7 +1,9 @@
 namespace MedicalTrack.src.Patient.Dtos;
 
 using System.ComponentModel.DataAnnotations;
+using MedicalTrack.src.Schedule.Dtos;
 using MedicalTrack.src.Schedule.Model;
+using MedicalTrack.src.Test.Dtos;
 using MedicalTrack.src.Test.Model;
 
 public record PatientDto
@@ -18,7 +20,6 @@ public record PatientDto
     public string PatientCondition { get; set; } = string.Empty;
 
     public virtual ICollection<Schedule> Schedules { get; } = new List<Schedule>();
-
     public virtual ICollection<Test> Tests { get; } = new List<Test>();
 
 }

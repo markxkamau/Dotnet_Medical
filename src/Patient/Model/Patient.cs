@@ -1,7 +1,9 @@
 ﻿
 namespace MedicalTrack.src.Patient.Model;
 
+using MedicalTrack.src.Schedule.Dtos;
 using MedicalTrack.src.Schedule.Model;
+using MedicalTrack.src.Test.Dtos;
 using MedicalTrack.src.Test.Model;
 public partial class Patient
 {

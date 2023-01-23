@@ -2,14 +2,14 @@
 
 using MedicalTrack.src.Patient.Model;
 using MedicalTrack.src.Drug.Model;
+using MedicalTrack.src.Patient.Dtos;
+using MedicalTrack.src.Drug.Dto;
 
 public partial class Schedule
 {
-    public int? ScheduleDay { get; set; }
+    public int? Intakes { get; set; }
 
-    public TimeOnly ScheduleTime { get; set; }
-
-    public bool[]? ScheduleConfirm { get; set; }
+    public List<String> ScheduleTime { get; set; } = new List<string>();
 
     public int SchedulePatientId { get; set; }
 

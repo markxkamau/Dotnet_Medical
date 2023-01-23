@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace MedicalTrack.src.Drug.Model;
 
+using MedicalTrack.src.Schedule.Dtos;
 using MedicalTrack.src.Schedule.Model;
 public partial class Drug
 {

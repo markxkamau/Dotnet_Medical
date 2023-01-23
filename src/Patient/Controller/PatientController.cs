@@ -20,13 +20,13 @@ public class PatientController : ControllerBase
 
     //GetAll
     [HttpGet("patients")]
-    public ActionResult<List<Patient>> GetAllPatients()
+    public ActionResult<List<PatientDto>> GetAllPatients()
     {
         return _service.GetAllPatients();
     }
 
     [HttpGet("patient/{id}")]
-    public ActionResult<Patient> GetPatientById(int id)
+    public ActionResult<PatientDto> GetPatientById(int id)
     {
         var patient = _service.GetPatientById(id);
         if (patient is null)

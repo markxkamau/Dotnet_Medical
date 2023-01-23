@@ -21,15 +21,20 @@ public class DrugController : ControllerBase
 
 
     [HttpGet("drugs")]
-    public ActionResult<List<Drug>> GetAllDrugs()
+    public ActionResult<List<DrugDto>> GetAllDrugs()
     {
-        return _service.GetAllDrugs();
+        return Ok(_service.GetAllDrugs());
     }
 
     [HttpGet("drug/{id}")]
     public ActionResult<DrugDto> GetDrugById(int id)
     {
-        return _service.GetDrugById(id);
+         bool exist = _service.CheckIfExists(id);
+        if (!exist)
+        {
+            return BadRequest("Drug Id not found");
+        }
+        return Ok(_service.GetDrugById(id));
     }
 
     [HttpPost("new_drug")]

@@ -58,26 +58,37 @@ public class DrugService
         drugInfo.Add("Drug Packaging", createDrugDto.DrugPackaging);
 
         var drug = _context.Drugs.Any(p => p.DrugInfo == drugInfo);
-        if (drug)
-        {
-            return true;
-        }
-        return false;
+        
+        return !drug;
     }
 
-    internal ActionResult<List<Drug>> GetAllDrugs()
+    internal bool CheckIfExists(int id)
     {
-        return _context.Drugs.ToList();
+        var drug = _context.Drugs.Any(p => p.DrugId == id);
+        return drug;
+
+    }
+
+    internal ActionResult<List<DrugDto>> GetAllDrugs()
+    {
+        var drugs = _context.Drugs.ToList();
+        List<DrugDto> drugDtos = new List<DrugDto>();
+        foreach (var item in drugs)
+        {
+            var drugDto = new DrugDto{
+                DrugId = item.DrugId,
+                DrugCount = item.DrugCount,
+                DrugInfo = item.DrugInfo
+
+            };
+            drugDtos.Add(drugDto);
+        }
+        return drugDtos;
     }
 
     internal ActionResult<DrugDto> GetDrugById(int id)
     {
-        var drug = _context.Drugs.SingleOrDefault(p => p.DrugId == id);
-
-        if (drug is null)
-        {
-            return new DrugDto();
-        }
+        var drug = _context.Drugs.Single(p => p.DrugId == id);
 
         var drugDto = new DrugDto
         {

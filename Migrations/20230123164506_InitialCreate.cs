@@ -23,7 +23,7 @@ namespace MedicalTrack.Migrations
                     DrugId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DrugInfo = table.Column<Dictionary<string, string>>(type: "hstore", nullable: true),
-                    DrugCount = table.Column<int>(type: "integer", nullable: true),
+                    DrugCount = table.Column<int>(type: "integer", nullable: false),
                     DrugPurpose = table.Column<Dictionary<string, string>>(type: "hstore", nullable: true)
                 },
                 constraints: table =>
@@ -38,6 +38,7 @@ namespace MedicalTrack.Migrations
                     PatientId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PatientName = table.Column<Dictionary<string, string>>(type: "hstore", nullable: false),
+                    PatientEmail = table.Column<string>(type: "text", nullable: false),
                     PatientAge = table.Column<int>(type: "integer", nullable: false),
                     PatientCondition = table.Column<string>(type: "text", nullable: false)
                 },
@@ -52,9 +53,8 @@ namespace MedicalTrack.Migrations
                 {
                     ScheduleId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ScheduleDay = table.Column<int>(type: "integer", nullable: true),
-                    ScheduleTime = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
-                    ScheduleConfirm = table.Column<bool[]>(type: "boolean[]", nullable: true),
+                    Intakes = table.Column<int>(type: "integer", nullable: true),
+                    ScheduleTime = table.Column<List<string>>(type: "text[]", nullable: false),
                     SchedulePatientId = table.Column<int>(type: "integer", nullable: false),
                     ScheduleDrugId = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -85,6 +85,7 @@ namespace MedicalTrack.Migrations
                     TestResultSugars = table.Column<int>(type: "integer", nullable: false),
                     TestResultWeight = table.Column<int>(type: "integer", nullable: false),
                     TestResultOxygen = table.Column<int>(type: "integer", nullable: false),
+                    TestDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     TestPatientId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
