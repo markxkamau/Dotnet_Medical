@@ -21,8 +21,10 @@ public class PatientService
     {
         var patients = _context.Patients.ToList();
         List<PatientDto> patientDtos = new List<PatientDto>();
-        foreach(Patient p in patients){
-            var patientDto = new PatientDto{
+        foreach (Patient p in patients)
+        {
+            var patientDto = new PatientDto
+            {
                 PatientId = p.PatientId,
                 PatientAge = p.PatientAge,
                 PatientCondition = p.PatientCondition,
@@ -81,10 +83,18 @@ public class PatientService
         return patientDto;
     }
 
+    internal void DeletePatient(int id)
+    {
+        var patient = _context.Patients.Single(p => p.PatientId == id);
+        _context.Patients.Remove(patient);
+        _context.SaveChanges();
+    }
+
     internal PatientDto GetPatientById(int id)
     {
         var patient = _context.Patients.Single(p => p.PatientId == id);
-        return new PatientDto{
+        return new PatientDto
+        {
             PatientAge = patient.PatientAge,
             PatientCondition = patient.PatientCondition,
             PatientEmail = patient.PatientEmail,
@@ -97,6 +107,16 @@ public class PatientService
     {
         var patient = _context.Patients.SingleOrDefault(p => p.PatientEmail == patientEmail);
         if (patient is null)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    internal bool SearchPatient(int id)
+    {
+        var patient = _context.Patients.Any(p => p.PatientId == id);
+        if (patient)
         {
             return true;
         }

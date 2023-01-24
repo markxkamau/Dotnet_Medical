@@ -44,6 +44,22 @@ public class TestService
         return testDto;
     }
 
+    internal bool CheckTest(int id)
+    {
+        if (_context.Tests.Any(t => t.TestId == id))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    internal void DeleteTest(int id)
+    {
+        var test = _context.Tests.Single(t => t.TestId == id);
+        _context.Tests.Remove(test);
+        _context.SaveChanges();
+    }
+
     internal ActionResult<List<TestDto>> GetAllTests()
     {
         var tests = _context.Tests.ToList();

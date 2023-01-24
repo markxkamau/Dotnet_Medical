@@ -55,5 +55,16 @@ public class PatientController : ControllerBase
 
         return Ok(patientDto);
     }
+    [HttpDelete("patient/{id}")]
+    public ActionResult DeletePatient(int id)
+    {
+        if (!_service.SearchPatient(id))
+        {
+            return NotFound("Patient Doesn't exist");
+
+        }
+        _service.DeletePatient(id);
+        return Ok("Patient Successfully Deleted");
+    }
 
 }
