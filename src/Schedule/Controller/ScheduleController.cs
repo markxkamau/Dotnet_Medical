@@ -61,4 +61,16 @@ public class ScheduleController : ControllerBase
 
     }
 
+    [HttpDelete("schedule/{id}")]
+    public IActionResult DeleteSchedule(int id)
+    {
+        bool schedule = _service.CheckSchedule(id);
+        if (!schedule)
+        {
+            return NotFound("Schedule doesn't exist");
+        }
+        _service.DeleteSchedule(id);
+        return Ok("Schedule Successfully deleted");
+    }
+
 }

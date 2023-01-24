@@ -36,4 +36,17 @@ public class TestController : ControllerBase
 
     }
 
+    [HttpDelete("test/{id}")]
+    public ActionResult DeleteTest(int id)
+    {
+        bool test = _service.CheckTest(id);
+        if (test)
+        {
+            return NotFound("Test Doesn't exist");
+
+        }
+        _service.DeleteTest(id);
+        return Ok("Test Deleted Successfully");
+    }
+
 }

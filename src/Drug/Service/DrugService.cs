@@ -58,7 +58,7 @@ public class DrugService
         drugInfo.Add("Drug Packaging", createDrugDto.DrugPackaging);
 
         var drug = _context.Drugs.Any(p => p.DrugInfo == drugInfo);
-        
+
         return !drug;
     }
 
@@ -69,13 +69,25 @@ public class DrugService
 
     }
 
+    internal bool DeleteDrugById(int id)
+    {
+        var drug = _context.Drugs.Single(d => d.DrugId == id);
+        if(drug is null){
+            return false;
+        }
+        _context.Drugs.Remove(drug);
+        _context.SaveChanges();
+        return true;
+    }
+
     internal ActionResult<List<DrugDto>> GetAllDrugs()
     {
         var drugs = _context.Drugs.ToList();
         List<DrugDto> drugDtos = new List<DrugDto>();
         foreach (var item in drugs)
         {
-            var drugDto = new DrugDto{
+            var drugDto = new DrugDto
+            {
                 DrugId = item.DrugId,
                 DrugCount = item.DrugCount,
                 DrugInfo = item.DrugInfo

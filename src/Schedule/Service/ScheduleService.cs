@@ -136,4 +136,18 @@ public class ScheduleService
         }
         return false;
     }
+
+    internal void DeleteSchedule(int id)
+    {
+        var schedule = _context.Schedules.Single(s => s.ScheduleId == id);
+        _context.Schedules.Remove(schedule);
+        _context.SaveChanges();
+    }
+
+    internal bool CheckSchedule(int id)
+    {
+        var schedule = _context.Schedules.Any(s => s.ScheduleId ==id);
+        return schedule;
+
+    }
 }

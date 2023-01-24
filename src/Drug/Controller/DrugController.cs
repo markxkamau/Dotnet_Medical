@@ -53,6 +53,23 @@ public class DrugController : ControllerBase
 
     }
 
+    [HttpDelete("drug/{id}")]
+    public ActionResult DeleteDrug(int id){
+        // Check if Drug already exists
+        bool exist = _service.CheckIfExists(id);
+        if (!exist)
+        {
+            return NotFound("Drug stated does not exists");
+        }
+        if (!_service.DeleteDrugById(id))
+        {
+            return BadRequest("Drug could not be deleted");
+            
+        }
+       
+        return Ok("Drug Successfully Deleted");
+    }
+
 
 
 }
